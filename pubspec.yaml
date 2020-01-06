@@ -25,6 +25,7 @@ dependencies:
   cupertino_icons: ^0.1.2
 
   async_redux: ^2.4.2
+  vector_math: ^2.0.8
 
 dev_dependencies:
   flutter_test:
