@@ -4,7 +4,6 @@ import 'package:tic_tac_toe_challenge/state/tic_tac_toe_state.dart';
 import 'package:tic_tac_toe_challenge/widgets/neu_cross.dart';
 import 'package:tic_tac_toe_challenge/widgets/neu_nought.dart';
 import 'package:vector_math/vector_math.dart' as vMath;
-import 'dart:math' as math;
 
 import '../main.dart';
 

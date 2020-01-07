@@ -41,6 +41,9 @@ class PlayAction extends ReduxAction<AppState> {
   }
 
   GameStage _getGameState(int updatedCrossCount, int updatedNoughtCount, Matrix3 updatedMatrix) {
+
+    if(updatedCrossCount + updatedNoughtCount <= 4) return GameStage.PLAYING;
+
     if (updatedMatrix.getColumn(0) == _crossVictoryVector ||
         updatedMatrix.getColumn(1) == _crossVictoryVector ||
         updatedMatrix.getColumn(2) == _crossVictoryVector ||
