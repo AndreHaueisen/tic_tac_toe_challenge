@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:tic_tac_toe_challenge/actions/play_action.dart';
 import 'package:tic_tac_toe_challenge/state/tic_tac_toe_state.dart';
+import 'package:tic_tac_toe_challenge/widgets/neu_cross.dart';
+import 'package:tic_tac_toe_challenge/widgets/neu_nought.dart';
 import 'package:vector_math/vector_math.dart' as vMath;
+import 'dart:math' as math;
 
 import '../main.dart';
 
@@ -19,7 +22,10 @@ class BoardPiece extends StatelessWidget {
     @required this.noughtCount,
     @required this.gameStage,
   })  : assert(state != null, 'Board piece received null state'),
-        assert(position != null, 'Board piece received null position');
+        assert(position != null, 'Board piece received null position'),
+        assert(crossCount != null, 'Board piece received null crossCount'),
+        assert(noughtCount != null, 'Board piece received null noughtCount'),
+        assert(gameStage != null, 'Game Stage received null gameStage');
 
   void _play() {
     final bool isCross = crossCount == noughtCount;
@@ -34,16 +40,7 @@ class BoardPiece extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Color stateColor;
-    if (state == 0) {
-      stateColor = Colors.yellow;
-    } else if (state == 1) {
-      stateColor = Colors.green;
-    } else if (state == -1) {
-      stateColor = Colors.red;
-    }
-
-    assert(stateColor != null);
+    final double containerSideSize = MediaQuery.of(context).size.width / 3;
 
     return GestureDetector(
       onTap: (state == 0 && gameStage == GameStage.PLAYING)
@@ -52,8 +49,29 @@ class BoardPiece extends StatelessWidget {
             }
           : null,
       child: Container(
-        color: stateColor,
+        margin: const EdgeInsets.all(8),
+        width: containerSideSize,
+        height: containerSideSize,
+        child: _buildPiece(containerSideSize),
       ),
+    );
+  }
+
+  Widget _buildPiece(double containerSize) {
+    if (state == -1) {
+      return NeuCross(size: containerSize * 0.6);
+    } else if (state == 1) {
+      return NeuNought(size: containerSize * 0.6);
+    } else {
+      return _buildEmptyPlaceholder(containerSize * 0.6);
+    }
+  }
+
+  Widget _buildEmptyPlaceholder(double size) {
+    return Container(
+      height: size,
+      width: size,
+      color: Colors.transparent,
     );
   }
 }

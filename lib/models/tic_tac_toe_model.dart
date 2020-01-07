@@ -21,13 +21,11 @@ class TicTacToeModel extends BaseModel<AppState> {
 
   @override
   BaseModel fromStore() {
-    var k = TicTacToeModel.build(
+    return TicTacToeModel.build(
       ticTacToeMatrix: state.ticTacToeState.ticTacToeMatrix,
       crossCount: state.ticTacToeState.crossCount,
       noughtsCount: state.ticTacToeState.noughtCount,
       gameStage: state.ticTacToeState.gameStage,
     );
-    print(' Model matrix \n ${k.ticTacToeMatrix}');
-    return k;
   }
 }

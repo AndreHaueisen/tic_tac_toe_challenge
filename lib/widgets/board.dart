@@ -2,7 +2,7 @@ import 'package:async_redux/async_redux.dart';
 import 'package:flutter/material.dart';
 import 'package:tic_tac_toe_challenge/models/tic_tac_toe_model.dart';
 import 'package:tic_tac_toe_challenge/widgets/board_piece.dart';
-import 'package:vector_math/vector_math.dart';
+import 'package:vector_math/vector_math.dart' as vMath;
 
 class Board extends StatelessWidget {
   @override
@@ -22,12 +22,11 @@ class Board extends StatelessWidget {
   }
 
   Widget _buildPlayableBoard(TicTacToeModel ticTacToeModel) {
-
     List<Widget> children = List.generate(9, (index) {
       final int row = (index / 3).floor();
       final int column = index % 3;
       return BoardPiece(
-        position: Vector2(row.toDouble(), column.toDouble()),
+        position: vMath.Vector2(row.toDouble(), column.toDouble()),
         state: ticTacToeModel.ticTacToeMatrix.entry(row, column).round(),
         crossCount: ticTacToeModel.crossCount,
         noughtCount: ticTacToeModel.noughtsCount,
@@ -35,7 +34,14 @@ class Board extends StatelessWidget {
       );
     });
 
-    return GridView.count(mainAxisSpacing: 5, crossAxisSpacing: 3, crossAxisCount: 3, children: children);
+    return GridView.count(
+      reverse: true,
+      physics: NeverScrollableScrollPhysics(),
+      mainAxisSpacing: 0,
+      crossAxisSpacing: 0,
+      crossAxisCount: 3,
+      children: children,
+    );
   }
 }
 
@@ -44,8 +50,10 @@ class BoardPainter extends CustomPainter {
 
   BoardPainter() {
     _boardPaint
-      ..color = Color(0xFF000000)
-      ..style = PaintingStyle.fill;
+      ..color = Colors.indigo[800]
+      ..style = PaintingStyle.fill
+      ..strokeWidth = 1.0
+      ..strokeCap = StrokeCap.round;
   }
 
   @override

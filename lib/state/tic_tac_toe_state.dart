@@ -1,7 +1,7 @@
 import 'package:vector_math/vector_math.dart';
 
 class TicTacToeState {
-  static final Matrix3 _emptyMatrix = Matrix3.columns(Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, 0));
+  static final Matrix3 _emptyMatrix = Matrix3.zero();
 
   final Matrix3 ticTacToeMatrix;
   final int crossCount;

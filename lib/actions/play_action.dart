@@ -17,7 +17,6 @@ class PlayAction extends ReduxAction<AppState> {
 
   @override
   AppState reduce() {
-    print('before update matrix: \n ${state.ticTacToeState.ticTacToeMatrix}');
 
     state.ticTacToeState.ticTacToeMatrix.setEntry(position.x.round(), position.y.round(), isCross ? -1 : 1);
 
@@ -31,7 +30,6 @@ class PlayAction extends ReduxAction<AppState> {
 
     final GameStage gameStage = _getGameState(toUpdateCrossCount, toUpdateNoughtCount, toUpdateMatrix);
 
-    print('toUpdateMatrix: \n ${toUpdateMatrix}');
     return state.copy(
       ticTacToeState: TicTacToeState(
         ticTacToeMatrix: toUpdateMatrix,
